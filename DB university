@@ -1,0 +1,55 @@
+CREATE DATABASE IF NOT EXISTS university
+  DEFAULT CHARACTER SET utf8
+  DEFAULT COLLATE utf8_general_ci;
+
+USE university;
+
+CREATE TABLE IF NOT EXISTS departments
+(
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255),
+  head  VARCHAR(255)
+);
+INSERT INTO departments(name, head) VALUES
+  ('Mathematics', 'Kovalenko'),
+  ('Geography', 'Kavka'),
+  ('Biology', 'Suprun'),
+  ('History', 'Tsap'),
+  ('Litarature', 'Sidorenko');
+
+CREATE TABLE IF NOT EXISTS lectors
+(
+  id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255),
+  surname VARCHAR(255),
+  degree VARCHAR(45),
+  salary INT
+);
+
+INSERT INTO lectors(name, surname, degree, salary) VALUES
+  ('Olesia', 'Huk', 'associate professor', 5400),
+  ('Ivan', 'Novak', 'professor', 7500),
+  ('Denys', 'Bohonis', 'associate professor', 5200),
+  ('Mykyta', 'Oliynyk', 'assistant', 4500),
+  ('Petro', 'Kets', 'associate professor', 5500);
+
+  CREATE TABLE IF NOT EXISTS ref_departments_lectors(
+  id_departments INT,
+  id_lectors INT,
+    FOREIGN KEY (id_departments)
+      REFERENCES departments(id),
+    FOREIGN KEY (id_lectors)
+      REFERENCES lectors(id)
+);
+
+INSERT INTO ref_departments_lectors(id_departments, id_lectors) VALUES
+  (1, 2),
+  (1, 5),
+  (2, 2),
+  (2, 3),
+  (3, 1),
+  (3, 3),
+  (4, 5),
+  (4, 3),
+  (5, 4),
+  (5, 1);
